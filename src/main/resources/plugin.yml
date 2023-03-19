@@ -1,0 +1,11 @@
+name: SpearFishPlugin
+version: '${project.version}'
+main: me.rages.spearfish.SpearFishPlugin
+api-version: 1.19
+authors: [Rages]
+description: Allow players to fish with custom trident.
+commands:
+  fishingspear:
+    description: Give player a fishing spear.
+    aliases:
+      - spear
