@@ -1,4 +1,4 @@
-package me.rages.spearfish.listeners;
+package me.rages.spearfishing.listeners;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fish;

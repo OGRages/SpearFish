@@ -1,8 +1,8 @@
-package me.rages.spearfish.command;
+package me.rages.spearfishing.command;
 
 import com.google.common.collect.ImmutableMap;
-import me.rages.spearfish.SpearFishPlugin;
-import me.rages.spearfish.utils.Color;
+import me.rages.spearfishing.SpearFishingPlugin;
+import me.rages.spearfishing.utils.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,15 +13,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SpearCommand implements CommandExecutor, TabCompleter {
+public class FishingCommand implements CommandExecutor, TabCompleter {
 
-    private SpearFishPlugin plugin;
+    private SpearFishingPlugin plugin;
     private String command;
 
     private final static ImmutableMap<String, SubCommand> subCommands = ImmutableMap.of(
 
             "help", new SubCommand() {
-                private static final String LINE = "&f/fishing %s &b- &7%s";
+                private static final String LINE = "&f/fishingspear %s &b- &7%s";
 
                 @Override
                 public void execute(CommandSender sender, String[] args) {
@@ -46,11 +46,11 @@ public class SpearCommand implements CommandExecutor, TabCompleter {
             }.desc("sell all of your fish")
     );
 
-    public static SpearCommand initialize(String command, SpearFishPlugin plugin) {
-        return new SpearCommand(command, plugin);
+    public static FishingCommand initialize(String command, SpearFishingPlugin plugin) {
+        return new FishingCommand(command, plugin);
     }
 
-    private SpearCommand(String command, SpearFishPlugin plugin) {
+    private FishingCommand(String command, SpearFishingPlugin plugin) {
         this.plugin = plugin;
         plugin.getCommand(command).setExecutor(this);
         plugin.getCommand(command).setTabCompleter(this);

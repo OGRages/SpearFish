@@ -1,4 +1,4 @@
-package me.rages.spearfish.utils;
+package me.rages.spearfishing.utils;
 
 import org.bukkit.ChatColor;
 

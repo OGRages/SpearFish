@@ -1,4 +1,4 @@
-package me.rages.spearfish.command;
+package me.rages.spearfishing.command;
 
 import org.bukkit.command.CommandSender;
 
