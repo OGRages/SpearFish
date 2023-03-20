@@ -1,0 +1,8 @@
+spear-settings:
+  catch-vanilla-fish: true
+
+
+spear-itemstack:
+  name: "&b&lFISHING SPEAR"
+  lore:
+    - '&7Throw at fish to catch'

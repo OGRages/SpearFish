@@ -1,6 +1,6 @@
-name: SpearFishPlugin
+name: SpearFishing
 version: '${project.version}'
-main: me.rages.spearfish.SpearFishPlugin
+main: me.rages.spearfishing.SpearFishingPlugin
 api-version: 1.19
 authors: [Rages]
 description: Allow players to fish with custom trident.
