@@ -1,52 +1,59 @@
 package me.rages.spearfishing.listeners;
 
 import com.destroystokyo.paper.event.player.PlayerLaunchProjectileEvent;
+import me.rages.spearfishing.SpearFishingPlugin;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Fish;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class FishingListener implements Listener {
 
-    private Set<Projectile> cachedProjectiles = new HashSet<>();
+    private final SpearFishingPlugin plugin;
+
+    public FishingListener(SpearFishingPlugin plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onSpearLaunch(PlayerLaunchProjectileEvent event) {
         event.setCancelled(true);
         Player player = event.getPlayer();
-        cachedProjectiles.add(
-                player.launchProjectile(event.getProjectile().getClass(), event.getProjectile().getVelocity())
-        );
-    }
 
-    @EventHandler
-    public void onCollide(ProjectileHitEvent event) {
-
+        if (isSpearItem(event.getItemStack())) {
+            Trident trident = (Trident) player.launchProjectile(event.getProjectile().getClass(), event.getProjectile().getVelocity());
+            trident.setItem(plugin.getSpearItem());
+        }
     }
 
     @EventHandler
     public void onSpearHit(ProjectileHitEvent event) {
         // check if projectile has hit an entity
-        if (cachedProjectiles.contains(event.getEntity())) {
-            if (event.getHitEntity() != null) {
-                Entity entity = event.getHitEntity();
-                if (entity instanceof Fish) {
+        Entity entity = event.getEntity();
+        if (entity.getType() == EntityType.TRIDENT) {
+            ItemStack itemStack = ((Trident) entity).getItem();
+
+            System.out.println(itemStack.hasItemMeta());
+
+            if (isSpearItem(itemStack) && event.getHitEntity() != null) {
+                Entity hitEntity = event.getHitEntity();
+                if (hitEntity instanceof Fish) {
                     // check if fish entity is a can be speared
                     Bukkit.broadcastMessage("killed fish");
-                    entity.remove();
+                    hitEntity.remove();
                 }
             }
             event.getEntity().remove();
         }
     }
 
+    private boolean isSpearItem(ItemStack itemStack) {
+        return itemStack.hasItemMeta() && itemStack.getItemMeta().getPersistentDataContainer().has(plugin.getNamespacedKey());
+    }
 
 }
