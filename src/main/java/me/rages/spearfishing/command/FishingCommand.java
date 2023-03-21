@@ -2,6 +2,7 @@ package me.rages.spearfishing.command;
 
 import com.google.common.collect.ImmutableMap;
 import me.rages.spearfishing.SpearFishingPlugin;
+import me.rages.spearfishing.command.impl.EditCommand;
 import me.rages.spearfishing.utils.Color;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.bukkit.Bukkit;
@@ -14,60 +15,16 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class FishingCommand implements CommandExecutor, TabCompleter {
 
+    private ImmutableMap<String, SubCommand> subCommands;
     private SpearFishingPlugin plugin;
 
-    private final static ImmutableMap<String, SubCommand> subCommands = ImmutableMap.of(
-
-            "help", new SubCommand() {
-
-                private static final String HEADER = "";
-                private static final String LINE = "&f/fishingspear %s &b- &7%s";
-
-                @Override
-                public void execute(CommandSender sender, String[] args) {
-                    subCommands.entrySet().stream()
-                            .map(cmd -> String.format(Color.colorize(LINE), cmd.getKey().toLowerCase(), cmd.getValue().getDescription()))
-                            .forEach(sender::sendMessage);
-                }
-            }.desc("displays help menu"),
-
-            "give", new SubCommand("spearfishing.command.give") {
-                @Override
-                public void execute(CommandSender sender, String[] args) {
-
-                    if (args.length < 2) {
-                        sender.sendMessage(ChatColor.RED + "/fishingspear give [player] <amount>");
-                        return;
-                    }
-
-                    Player player = Bukkit.getServer().getPlayer(args[1]);
-
-                    if (player == null) {
-                        sender.sendMessage(ChatColor.RED + "The player '" + args[1] + "' is not online.");
-                        return;
-                    }
-
-                    int amount = NumberUtils.toInt(args[2], 1); // parse or default 1
-
-                    for (int i = 0; i < amount; i++) {
-                        player.getInventory().addItem(SpearFishingPlugin.getSpearItem());
-                    }
-                }
-
-            }.desc("give a player a spear"),
-
-            "sell", new SubCommand("spearfishing.command.sell") {
-                @Override
-                public void execute(CommandSender sender, String[] args) {
-                    Bukkit.broadcastMessage("sell command");
-                }
-
-            }.desc("sell all of your fish")
-    );
 
     public static FishingCommand initialize(String command, SpearFishingPlugin plugin) {
         return new FishingCommand(command, plugin);
@@ -77,6 +34,58 @@ public class FishingCommand implements CommandExecutor, TabCompleter {
         this.plugin = plugin;
         plugin.getCommand(command).setExecutor(this);
         plugin.getCommand(command).setTabCompleter(this);
+
+        this.subCommands = ImmutableMap.of(
+                "help", new SubCommand() {
+
+                    private static final String HEADER = "     &8--- &c&lSPEAR FISHING &8---     ";
+                    private static final String LINE = "&f/spearfishing %s &c- &7%s";
+
+                    @Override
+                    public void execute(CommandSender sender, String[] args) {
+                        sender.sendMessage(Color.colorize(HEADER));
+                        subCommands.entrySet().stream()
+                                .map(cmd -> String.format(Color.colorize(LINE), cmd.getKey().toLowerCase(), cmd.getValue().getDescription()))
+                                .forEach(sender::sendMessage);
+                    }
+                }.desc("displays help menu"),
+
+                "give", new SubCommand("spearfishing.command.give") {
+                    @Override
+                    public void execute(CommandSender sender, String[] args) {
+
+                        if (args.length < 2) {
+                            sender.sendMessage(ChatColor.RED + "/fishingspear give [player] <amount>");
+                            return;
+                        }
+
+                        Player player = Bukkit.getServer().getPlayer(args[1]);
+
+                        if (player == null) {
+                            sender.sendMessage(ChatColor.RED + "The player '" + args[1] + "' is not online.");
+                            return;
+                        }
+
+                        int amount = NumberUtils.toInt(args[2], 1); // parse or default 1
+
+                        for (int i = 0; i < amount; i++) {
+                            player.getInventory().addItem(SpearFishingPlugin.getSpearItem());
+                        }
+                    }
+
+                }.desc("give a player a spear"),
+
+                "sell", new SubCommand("spearfishing.command.sell") {
+                    @Override
+                    public void execute(CommandSender sender, String[] args) {
+                        Bukkit.broadcastMessage("sell command");
+                    }
+
+                }.desc("sell all of your fish"),
+
+                "edit", new EditCommand(plugin).desc("edit fish spawner blocks")
+        );
+
     }
 
     @Override

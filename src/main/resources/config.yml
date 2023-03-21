@@ -1,6 +1,8 @@
 spear-settings:
   catch-vanilla-fish: true
 
+fish-settings:
+  use-custom-names: true
 
 spear-itemstack:
   name: "&b&lFISHING SPEAR"

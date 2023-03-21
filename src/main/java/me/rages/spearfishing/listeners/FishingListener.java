@@ -5,7 +5,9 @@ import me.rages.spearfishing.SpearFishingPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,7 +26,6 @@ public class FishingListener implements Listener {
     public void onSpearLaunch(PlayerLaunchProjectileEvent event) {
         event.setCancelled(true);
         Player player = event.getPlayer();
-
         if (isSpearItem(event.getItemStack())) {
             Trident trident = (Trident) player.launchProjectile(event.getProjectile().getClass(), event.getProjectile().getVelocity());
             trident.setItem(plugin.getSpearItem());
@@ -37,18 +38,23 @@ public class FishingListener implements Listener {
         Entity entity = event.getEntity();
         if (entity.getType() == EntityType.TRIDENT) {
             ItemStack itemStack = ((Trident) entity).getItem();
-
-            System.out.println(itemStack.hasItemMeta());
-
             if (isSpearItem(itemStack) && event.getHitEntity() != null) {
                 Entity hitEntity = event.getHitEntity();
-                if (hitEntity instanceof Fish) {
+                if (hitEntity instanceof TropicalFish) {
                     // check if fish entity is a can be speared
-                    Bukkit.broadcastMessage("killed fish");
+                    Bukkit.broadcastMessage("caught fish");
                     hitEntity.remove();
                 }
             }
             event.getEntity().remove();
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onSpawnerSpawnEvent(CreatureSpawnEvent event) {
+        if (event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER && event.getEntity().getType() == EntityType.TROPICAL_FISH) {
+            event.setCancelled(true);
+            System.out.println("cancelled");
         }
     }
 

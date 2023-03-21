@@ -1,0 +1,12 @@
+# probability from 1 -> 0.001
+fish:
+  black_tang:
+    display-name: "&b&lRARE Black Tang"
+    name: "Black Tang"
+    catch-chance: 0.5
+    spawn-chance: 0.01
+  cotton_candy_beta:
+    display-name: "&7&lCOMMON Cotton Candy Betta"
+    name: "Cotton Candy Betta"
+    catch-chance: 0.95
+    spawn-chance: 0.01

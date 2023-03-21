@@ -1,6 +1,7 @@
 package me.rages.spearfishing;
 
 import me.rages.spearfishing.command.FishingCommand;
+import me.rages.spearfishing.config.FishConfig;
 import me.rages.spearfishing.listeners.FishingListener;
 import me.rages.spearfishing.utils.Color;
 import org.bukkit.Material;
@@ -22,12 +23,14 @@ public final class SpearFishingPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        NAMESPACED_KEY = new NamespacedKey(this, "fishingspear");
+        NAMESPACED_KEY = new NamespacedKey(this, "spearfishing");
 
 
         saveDefaultConfig();
+        FishConfig.loadConfig(this);
+
         // initialize spear command
-        FishingCommand.initialize("fishingspear", this);
+        FishingCommand.initialize("spearfishing", this);
         getServer().getPluginManager().registerEvents(new FishingListener(this), this);
     }
 

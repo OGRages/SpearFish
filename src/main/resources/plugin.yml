@@ -5,7 +5,7 @@ api-version: 1.19
 authors: [Rages]
 description: Allow players to fish with custom trident.
 commands:
-  fishingspear:
+  spearfishing:
     description: Give player a fishing spear.
     aliases:
       - spear
