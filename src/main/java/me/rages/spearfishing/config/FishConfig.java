@@ -1,22 +1,17 @@
 package me.rages.spearfishing.config;
 
 import me.rages.spearfishing.SpearFishingPlugin;
-import me.rages.spearfishing.data.Fish;
+import me.rages.spearfishing.data.SpearableFish;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FishConfig {
-
-    private List<Fish> fishList = new ArrayList<>();
 
     private SpearFishingPlugin plugin;
 
@@ -44,8 +39,12 @@ public class FishConfig {
 
         FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
         ConfigurationSection fishSection = config.getConfigurationSection("fish");
+
         // create a new Fish object using the Fish.load() method
-        fishSection.getKeys(false).forEach(fishName -> fishList.add(Fish.load(config, fishName)));
+        fishSection.getKeys(false).forEach(fishName -> {
+            SpearableFish fish = SpearableFish.load(config, fishName);
+            plugin.getSpawnableFishes().put(fish, fish.getSpawnChance());
+        });
     }
 
     public static FishConfig loadConfig(SpearFishingPlugin plugin) {

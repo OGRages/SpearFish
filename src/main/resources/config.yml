@@ -1,8 +1,9 @@
 spear-settings:
-  catch-vanilla-fish: true
+  catch-vanilla-fish: false
 
 fish-settings:
   use-custom-names: true
+  maximum-fish: 30
 
 spear-itemstack:
   name: "&b&lFISHING SPEAR"

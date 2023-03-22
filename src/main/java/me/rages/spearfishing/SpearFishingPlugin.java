@@ -2,7 +2,9 @@ package me.rages.spearfishing;
 
 import me.rages.spearfishing.command.FishingCommand;
 import me.rages.spearfishing.config.FishConfig;
-import me.rages.spearfishing.listeners.FishingListener;
+import me.rages.spearfishing.data.SpearableFish;
+import me.rages.spearfishing.listeners.FishingSpawnerListener;
+import me.rages.spearfishing.listeners.FishingSpearListener;
 import me.rages.spearfishing.utils.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,7 +13,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public final class SpearFishingPlugin extends JavaPlugin {
@@ -20,18 +25,21 @@ public final class SpearFishingPlugin extends JavaPlugin {
 
     private NamespacedKey NAMESPACED_KEY;
 
+    private Map<SpearableFish, Double> spawnableFishes = new LinkedHashMap<>();
+
 
     @Override
     public void onEnable() {
         NAMESPACED_KEY = new NamespacedKey(this, "spearfishing");
-
 
         saveDefaultConfig();
         FishConfig.loadConfig(this);
 
         // initialize spear command
         FishingCommand.initialize("spearfishing", this);
-        getServer().getPluginManager().registerEvents(new FishingListener(this), this);
+        getServer().getPluginManager().registerEvents(new FishingSpearListener(this), this);
+        getServer().getPluginManager().registerEvents(new FishingSpawnerListener(this), this);
+
     }
 
     @Override
@@ -53,5 +61,9 @@ public final class SpearFishingPlugin extends JavaPlugin {
 
     public NamespacedKey getNamespacedKey() {
         return NAMESPACED_KEY;
+    }
+
+    public Map<SpearableFish, Double> getSpawnableFishes() {
+        return spawnableFishes;
     }
 }

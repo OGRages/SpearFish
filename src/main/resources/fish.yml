@@ -1,12 +1,97 @@
-# probability from 1 -> 0.001
 fish:
-  black_tang:
-    display-name: "&b&lRARE Black Tang"
-    name: "Black Tang"
-    catch-chance: 0.5
-    spawn-chance: 0.01
-  cotton_candy_beta:
-    display-name: "&7&lCOMMON Cotton Candy Betta"
-    name: "Cotton Candy Betta"
+  legendary_anemone:
+    display-name: "&6&lLegendary Anemone"
+    name: "Anemone"
+    pattern: STRIPEY
+    body-color: ORANGE
+    pattern-color: GRAY
     catch-chance: 0.95
-    spawn-chance: 0.01
+    spawn-chance: 2
+  rare_black_tang:
+    display-name: "&9&lRare Black Tang"
+    name: "Black Tang"
+    pattern: FLOPPER
+    body-color: GRAY
+    pattern-color: GRAY
+    catch-chance: 0.95
+    spawn-chance: 4
+  rare_blue_tang:
+    display-name: "&9&lRare Blue Tang"
+    name: "Blue Tang"
+    pattern: FLOPPER
+    body-color: GRAY
+    pattern-color: BLUE
+    catch-chance: 0.95
+    spawn-chance: 4
+  uncommon_blue_dory:
+    display-name: "&a&lUncommon Blue Dory"
+    name: "Blue Dory"
+    pattern: SUNSTREAK
+    body-color: BLUE
+    pattern-color: GRAY
+    catch-chance: 0.95
+    spawn-chance: 5
+  uncommon_butterflyfish:
+    display-name: "&a&lUncommon Butterflyfish"
+    name: "Butterflyfish"
+    pattern: CLAYFISH
+    body-color: WHITE
+    pattern-color: GRAY
+    catch-chance: 0.95
+    spawn-chance: 5
+  uncommon_cichlid:
+    display-name: "&a&lUncommon Cichlid"
+    name: "Cichlid"
+    pattern: SUNSTREAK
+    body-color: BLUE
+    pattern-color: GRAY
+    catch-chance: 0.95
+    spawn-chance: 5
+  common_clownfish:
+    display-name: "&7&lCommon Clownfish"
+    name: "Clownfish"
+    pattern: KOB
+    body-color: ORANGE
+    pattern-color: WHITE
+    catch-chance: 0.95
+    spawn-chance: 12.5
+  common_cotton_candy_betta:
+    display-name: "&7&lCommon Cotton Candy Betta"
+    name: "Cotton Candy Betta"
+    pattern: SPOTTY
+    body-color: PINK
+    pattern-color: LIGHT_BLUE
+    catch-chance: 0.95
+    spawn-chance: 12.5
+  common_dottyback:
+    display-name: "&7&lCommon Dottyback"
+    name: "Dottyback"
+    pattern: BLOCKFISH
+    body-color: PURPLE
+    pattern-color: YELLOW
+    catch-chance: 0.95
+    spawn-chance: 12.5
+  common_emperor_red_snapper:
+    display-name: "&7&lCommon Emperor Red Snapper"
+    name: "Emperor Red Snapper"
+    pattern: CLAYFISH
+    body-color: WHITE
+    pattern-color: RED
+    catch-chance: 0.95
+    spawn-chance: 12.5
+  common_goatfish:
+    display-name: "&7&lCommon Goatfish"
+    name: "Goatfish"
+    pattern: SPOTTY
+    body-color: WHITE
+    pattern-color: YELLOW
+    catch-chance: 0.95
+    spawn-chance: 12.5
+  common_moorish_idol:
+    display-name: "&7&lCommon Moorish Idol"
+    name: "Moorish Idol"
+    pattern: GLITTER
+    body-color: WHITE
+    pattern-color: GRAY
+    catch-chance: 0.95
+    spawn-chance: 12.5

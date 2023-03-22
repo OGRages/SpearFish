@@ -11,14 +11,11 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class FishingListener implements Listener {
+public class FishingSpearListener implements Listener {
 
     private final SpearFishingPlugin plugin;
 
-    public FishingListener(SpearFishingPlugin plugin) {
+    public FishingSpearListener(SpearFishingPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -47,14 +44,6 @@ public class FishingListener implements Listener {
                 }
             }
             event.getEntity().remove();
-        }
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onSpawnerSpawnEvent(CreatureSpawnEvent event) {
-        if (event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER && event.getEntity().getType() == EntityType.TROPICAL_FISH) {
-            event.setCancelled(true);
-            System.out.println("cancelled");
         }
     }
 
