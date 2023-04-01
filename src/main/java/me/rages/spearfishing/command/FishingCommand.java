@@ -12,13 +12,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class FishingCommand implements CommandExecutor, TabCompleter {
 
@@ -78,7 +77,21 @@ public class FishingCommand implements CommandExecutor, TabCompleter {
                 "sell", new SubCommand("spearfishing.command.sell") {
                     @Override
                     public void execute(CommandSender sender, String[] args) {
-                        Bukkit.broadcastMessage("sell command");
+
+                        Player player = (Player) sender;
+                        Arrays.stream(player.getInventory().getContents())
+                                .filter(itemStack -> itemStack != null && itemStack.hasItemMeta())
+                                .forEach(itemStack -> {
+                                    if (itemStack.getItemMeta().getPersistentDataContainer().has(plugin.getCustomFishKey())) {
+                                        String customFishData = itemStack.getItemMeta().getPersistentDataContainer().get(plugin.getCustomFishKey(), PersistentDataType.STRING);
+                                        for (int i = 0; i < itemStack.getAmount(); i++) {
+                                            plugin.getSpearableFishMap().get(customFishData).getRewards()
+                                                    .forEach(cmd -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd));
+
+                                        }
+                                        player.getInventory().removeItem(itemStack);
+                                    }
+                                });
                     }
 
                 }.desc("sell all of your fish"),

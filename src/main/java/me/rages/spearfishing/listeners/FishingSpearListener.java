@@ -104,6 +104,7 @@ public class FishingSpearListener implements Listener {
                 .stream().map(Color::colorize)
                 .collect(Collectors.toList());
         itemMeta.setLore(configLore);
+        itemMeta.getPersistentDataContainer().set(plugin.getCustomFishKey(), PersistentDataType.STRING, name);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

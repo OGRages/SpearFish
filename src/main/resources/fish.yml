@@ -7,6 +7,8 @@ fish:
     pattern-color: GRAY
     catch-chance: 0.95
     spawn-chance: 2
+    reward-cmds:
+      - "broadcast sold &6&lLegendary Anemone"
   rare_black_tang:
     display-name: "&9&lRare Black Tang"
     name: "Black Tang"
@@ -15,6 +17,8 @@ fish:
     pattern-color: GRAY
     catch-chance: 0.95
     spawn-chance: 4
+    reward-cmds:
+      - "broadcast sold &9&lRare Black Tang"
   rare_blue_tang:
     display-name: "&9&lRare Blue Tang"
     name: "Blue Tang"
@@ -23,6 +27,8 @@ fish:
     pattern-color: BLUE
     catch-chance: 0.95
     spawn-chance: 4
+    reward-cmds:
+      - "broadcast sold &9&lRare Blue Tang"
   uncommon_blue_dory:
     display-name: "&a&lUncommon Blue Dory"
     name: "Blue Dory"
@@ -31,6 +37,8 @@ fish:
     pattern-color: GRAY
     catch-chance: 0.95
     spawn-chance: 5
+    reward-cmds:
+      - "broadcast sold &a&lUncommon Blue Dory"
   uncommon_butterflyfish:
     display-name: "&a&lUncommon Butterflyfish"
     name: "Butterflyfish"
@@ -39,6 +47,8 @@ fish:
     pattern-color: GRAY
     catch-chance: 0.95
     spawn-chance: 5
+    reward-cmds:
+      - "broadcast sold &a&lUncommon Butterflyfish"
   uncommon_cichlid:
     display-name: "&a&lUncommon Cichlid"
     name: "Cichlid"
@@ -47,6 +57,8 @@ fish:
     pattern-color: GRAY
     catch-chance: 0.95
     spawn-chance: 5
+    reward-cmds:
+      - "broadcast sold &a&lUncommon Cichlid"
   common_clownfish:
     display-name: "&7&lCommon Clownfish"
     name: "Clownfish"
@@ -55,6 +67,8 @@ fish:
     pattern-color: WHITE
     catch-chance: 0.95
     spawn-chance: 12.5
+    reward-cmds:
+      - "broadcast sold &7&lCommon Clownfish"
   common_cotton_candy_betta:
     display-name: "&7&lCommon Cotton Candy Betta"
     name: "Cotton Candy Betta"
@@ -63,6 +77,8 @@ fish:
     pattern-color: LIGHT_BLUE
     catch-chance: 0.95
     spawn-chance: 12.5
+    reward-cmds:
+      - "broadcast sold &7&lCommon Cotton Candy Betta"
   common_dottyback:
     display-name: "&7&lCommon Dottyback"
     name: "Dottyback"
@@ -71,6 +87,8 @@ fish:
     pattern-color: YELLOW
     catch-chance: 0.95
     spawn-chance: 12.5
+    reward-cmds:
+      - "broadcast sold &7&lCommon Dottyback"
   common_emperor_red_snapper:
     display-name: "&7&lCommon Emperor Red Snapper"
     name: "Emperor Red Snapper"
@@ -79,6 +97,8 @@ fish:
     pattern-color: RED
     catch-chance: 0.95
     spawn-chance: 12.5
+    reward-cmds:
+      - "broadcast sold &7&lCommon Emperor Red Snapper"
   common_goatfish:
     display-name: "&7&lCommon Goatfish"
     name: "Goatfish"
@@ -87,6 +107,8 @@ fish:
     pattern-color: YELLOW
     catch-chance: 0.95
     spawn-chance: 12.5
+    reward-cmds:
+      - "broadcast sold &7&lCommon Goatfish"
   common_moorish_idol:
     display-name: "&7&lCommon Moorish Idol"
     name: "Moorish Idol"
@@ -95,3 +117,5 @@ fish:
     pattern-color: GRAY
     catch-chance: 0.95
     spawn-chance: 12.5
+    reward-cmds:
+      - "broadcast sold &7&lCommon Moorish Idol"
