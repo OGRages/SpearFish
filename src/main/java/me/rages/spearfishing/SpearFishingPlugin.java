@@ -23,14 +23,16 @@ public final class SpearFishingPlugin extends JavaPlugin {
 
     private static final ItemStack SPEAR_ITEM = new ItemStack(Material.TRIDENT);
 
-    private NamespacedKey NAMESPACED_KEY;
+    private NamespacedKey spearItemKey;
+    private NamespacedKey customFishKey;
 
     private Map<SpearableFish, Double> spawnableFishes = new LinkedHashMap<>();
-
+    private Map<String, SpearableFish> spearableFishMap = new HashMap<>();
 
     @Override
     public void onEnable() {
-        NAMESPACED_KEY = new NamespacedKey(this, "spearfishing");
+        spearItemKey = new NamespacedKey(this, "spearfishing");
+        customFishKey = new NamespacedKey(this, "custom-fish");
 
         saveDefaultConfig();
         FishConfig.loadConfig(this);
@@ -39,19 +41,18 @@ public final class SpearFishingPlugin extends JavaPlugin {
         FishingCommand.initialize("spearfishing", this);
         getServer().getPluginManager().registerEvents(new FishingSpearListener(this), this);
         getServer().getPluginManager().registerEvents(new FishingSpawnerListener(this), this);
-
     }
 
     @Override
     public void saveDefaultConfig() {
         super.saveDefaultConfig();
         ItemMeta itemMeta = SPEAR_ITEM.getItemMeta();
-        itemMeta.setDisplayName(Color.colorize(getConfig().getString("spear-itemstack.name")));
-        List<String> configLore = getConfig().getStringList("spear-itemstack.lore")
+        itemMeta.setDisplayName(Color.colorize(getConfig().getString("spear-item.name")));
+        List<String> configLore = getConfig().getStringList("spear-item.lore")
                 .stream().map(Color::colorize)
                 .collect(Collectors.toList());
         itemMeta.setLore(configLore);
-        itemMeta.getPersistentDataContainer().set(NAMESPACED_KEY, PersistentDataType.SHORT, (short) 0);
+        itemMeta.getPersistentDataContainer().set(spearItemKey, PersistentDataType.SHORT, (short) 0);
         SPEAR_ITEM.setItemMeta(itemMeta);
     }
 
@@ -59,11 +60,19 @@ public final class SpearFishingPlugin extends JavaPlugin {
         return SPEAR_ITEM;
     }
 
-    public NamespacedKey getNamespacedKey() {
-        return NAMESPACED_KEY;
+    public NamespacedKey getCustomFishKey() {
+        return customFishKey;
+    }
+
+    public NamespacedKey getSpearItemKey() {
+        return spearItemKey;
     }
 
     public Map<SpearableFish, Double> getSpawnableFishes() {
         return spawnableFishes;
+    }
+
+    public Map<String, SpearableFish> getSpearableFishMap() {
+        return spearableFishMap;
     }
 }

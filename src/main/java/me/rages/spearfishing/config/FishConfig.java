@@ -44,6 +44,7 @@ public class FishConfig {
         fishSection.getKeys(false).forEach(fishName -> {
             SpearableFish fish = SpearableFish.load(config, fishName);
             plugin.getSpawnableFishes().put(fish, fish.getSpawnChance());
+            plugin.getSpearableFishMap().put(fish.getName(), fish);
         });
     }
 

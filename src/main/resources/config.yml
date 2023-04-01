@@ -1,11 +1,22 @@
+messages:
+  caught-fish: "&aYou have successfully caught a &2%fish_name%"
+  escaped-fish: "&cYou have failed to spear the &4%fish_name%"
+
 spear-settings:
   catch-vanilla-fish: false
 
 fish-settings:
-  use-custom-names: true
-  maximum-fish: 30
+  global-fish-limit: 30
+  auto-sell-fish: false
 
-spear-itemstack:
+fish-item:
+  material: TROPICAL_FISH
+  name: "&7%display_name%"
+  lore:
+    - " "
+    - "&7Use &c/spearfishing sell &7to sell all fish"
+
+spear-item:
   name: "&b&lFISHING SPEAR"
   lore:
     - '&7Throw at fish to catch'

@@ -11,9 +11,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
 
 public class FishingSpawnerListener implements Listener {
 
@@ -29,10 +31,9 @@ public class FishingSpawnerListener implements Listener {
             event.setCancelled(true);
             SpearableFish spearableFish = getRandomFish();
             if (spearableFish != null) {
-                Bukkit.broadcastMessage("spawning a " + spearableFish.getName());
                 spawnSpearableFish(spearableFish, event.getLocation());
             } else {
-                Bukkit.broadcastMessage("could not find a fish to spawn");
+                plugin.getLogger().log(Level.WARNING, "Cannot spawn fish because your fish.yml does not add up to 100%");
             }
         }
     }
@@ -54,6 +55,7 @@ public class FishingSpawnerListener implements Listener {
         tropicalFish.setPattern(fish.getPattern());
         tropicalFish.setPatternColor(fish.getPatternColor());
         tropicalFish.setBodyColor(fish.getFishColor());
+        tropicalFish.getPersistentDataContainer().set(plugin.getCustomFishKey(), PersistentDataType.STRING, fish.getName());
     }
 
 }
